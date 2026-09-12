@@ -77,3 +77,43 @@
 - **Thứ tự thực hiện câu lệnh SQL (Cực kỳ quan trọng để hiểu luồng):** `FROM` $\rightarrow$ `WHERE` $\rightarrow$ `SELECT` $\rightarrow$ `ORDER BY`.
 
 ![WHERE - Lọc dữ liệu theo điều kiện](./images/lenh_sql_co_ban_p3.png)
+
+---
+
+### 1.4. WHERE – Kết hợp điều kiện với AND, OR
+**Overview:**
+- Dùng để lọc dữ liệu theo nhiều điều kiện cùng lúc để tìm đúng tập dữ liệu bạn cần.
+- **AND:** Trả về kết quả khi **tất cả** các điều kiện đều phải đúng.
+- **OR:** Trả về kết quả khi **chỉ cần một** trong các điều kiện đúng.
+- **Thứ tự ưu tiên toán tử trong WHERE:** 
+  1. Dấu ngoặc `()`
+  2. Toán tử `AND`
+  3. Toán tử `OR`
+- Toán tử `AND` luôn được ưu tiên xử lý trước `OR`. Do đó, nên dùng dấu ngoặc `()` để nhóm các điều kiện lại, giúp kiểm soát thứ tự ưu tiên và đảm bảo logic kết hợp được tính toán chính xác.
+
+**Khi nào dùng:**
+- Dùng `AND` khi muốn thu hẹp kết quả (yêu cầu khắt khe hơn).
+- Dùng `OR` khi muốn mở rộng kết quả (chấp nhận nhiều trường hợp khác nhau).
+- Cần kiểm tra kỹ các giá trị biên (như `>`, `<`, `=`, `BETWEEN`).
+- Luôn phải nhớ kiểm tra các trường hợp dữ liệu chứa `NULL` (xem xét dùng `IS NULL` hoặc `IS NOT NULL`).
+- Nên kết hợp với `ORDER BY` để xem kết quả gọn gàng, giúp đối chiếu và kiểm tra dễ dàng hơn.
+
+![WHERE - KẾT HỢP ĐIỀU KIỆN VỚI AND, OR](./images/lenh_sql_co_ban_p4_where_not.png)
+
+---
+
+### 1.5. WHERE – Toán tử NOT
+**Overview:**
+- `NOT` dùng để loại trừ (không phải), đảo ngược kết quả của một điều kiện và trả về các dòng dữ liệu **không** thỏa mãn điều kiện đó.
+- Các cách kết hợp phổ biến: `NOT IN (...)` (không nằm trong danh sách), `NOT LIKE` (không khớp mẫu), `IS NOT NULL` (khác NULL), `NOT BETWEEN`, `NOT =`, `NOT >`, `NOT <`.
+- `NOT` có độ ưu tiên cao hơn `AND` và `OR`.
+- Nên sử dụng dấu ngoặc `()` khi kết hợp `NOT` với `AND`, `OR` trong cùng một câu lệnh để tránh sự nhầm lẫn về mặt logic (Ví dụ: `WHERE NOT (status = 'Completed' OR status = 'Cancelled')`).
+
+**Khi nào dùng:**
+- Dùng để loại trừ một giá trị cụ thể hoặc một khoảng giá trị không mong muốn.
+- Rất hiệu quả khi cần loại trừ nhiều giá trị cùng lúc bằng cách kết hợp với `IN`, `LIKE`, hoặc loại các dòng thiếu dữ liệu bằng `IS NOT NULL`.
+- Kết hợp linh hoạt với `AND`/`OR` để tạo ra các kịch bản lọc phức tạp.
+- Khi sử dụng cần chú ý kiểm tra các trường hợp loại trừ để đảm bảo không trả về dữ liệu sai.
+- Cực kỳ chú ý test các ranh giới (boundary), ví dụ như khi dùng `NOT >` hoặc `NOT <` cần kiểm tra xem giá trị tại đúng ranh giới đó (như `amount = 10000000`) có bị loại bỏ sai hay không.
+
+![WHERE - TOÁN TỬ NOT](./images/lenh_sql_co_ban_p4_where_not.png)
