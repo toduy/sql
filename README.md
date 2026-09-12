@@ -1,0 +1,79 @@
+# 📚 MySQL Study Notes
+
+## 0. Nguồn tham khảo (References)
+- https://www.w3schools.com/sql/default.asp
+- https://sqlbolt.com/
+- https://leetcode.com/studyplan/top-sql-50/
+
+---
+
+## 📑 Table of Contents
+- [0. Nguồn tham khảo (References)](#0-nguồn-tham-khảo-references)
+- [Tổng quan: SQL cho Tester mới học](#tổng-quan-sql-cho-tester-mới-học)
+- [1. Các lệnh SQL cơ bản (Phần 1)](#1-các-lệnh-sql-cơ-bản-phần-1)
+  - [1.1. SELECT – Lấy dữ liệu](#11-select--lấy-dữ-liệu)
+  - [1.2. DISTINCT – Lấy giá trị khác nhau](#12-distinct--lấy-giá-trị-khác-nhau)
+  - [1.3. WHERE – Lọc dữ liệu theo điều kiện](#13-where--lọc-dữ-liệu-theo-điều-kiện)
+
+---
+
+## Tổng quan: SQL cho Tester mới học
+
+**📌 Overview:**
+- **SQL (Structured Query Language)** là ngôn ngữ tiêu chuẩn dùng để làm việc với Cơ sở dữ liệu (Database). Nó dùng để tạo, đọc, cập nhật, xoá và phân tích dữ liệu.
+- Được hỗ trợ bởi hầu hết các hệ quản trị CSDL (MySQL, PostgreSQL, SQL Server, Oracle,...).
+
+**💡 Ứng dụng:**
+- Giúp kiểm tra dữ liệu thực tế đang lưu trong database.
+- Xác minh kết quả chính xác sau khi thao tác chức năng trên UI.
+- Phân tích nguyên nhân lỗi nhanh hơn (VD: Lỗi do Backend xử lý sai hay do Database lưu sai?).
+- Hỗ trợ tạo dữ liệu test và test các kịch bản chuyên sâu.
+- Khi có bug, SQL giúp đối chiếu nhanh chóng xem dữ liệu lưu có đúng như mong muốn không.
+- Hỗ trợ đắc lực khi test các kịch bản phức tạp (thống kê tổng hợp, báo cáo, phân quyền,...).
+
+![Tổng quan SQL cho Tester](./images/sql_for_beginer.png)
+
+---
+
+## 1. Các lệnh SQL cơ bản (Phần 1)
+
+### 1.1. SELECT – Lấy dữ liệu
+**📌 Overview:**
+- Dùng để lấy dữ liệu từ một hoặc nhiều cột trong bảng.
+- Có thể dùng `SELECT *` để lấy tất cả các cột, hoặc chỉ định tên các cột cụ thể.
+- Có thể kết hợp với `ORDER BY` để sắp xếp dữ liệu trả về (tăng dần hoặc giảm dần).
+
+![SELECT - Lấy dữ liệu](./images/lenh_sql_co_ban_p1.png)
+
+---
+
+### 1.2. DISTINCT – Lấy giá trị khác nhau
+**📌 Overview:**
+- Giúp lấy các giá trị duy nhất (không trùng lặp) trong một hoặc nhiều cột do bạn chỉ định.
+- `DISTINCT` loại bỏ các dòng trùng nhau. Nếu có nhiều giá trị `NULL`, `DISTINCT` cũng gộp lại và `NULL` chỉ xuất hiện 1 lần trong kết quả.
+- Thường đứng ngay sau `SELECT`, không dùng trong `WHERE` hay `HAVING`.
+
+**💡 Khi nào dùng:**
+- Khi cần liệt kê danh sách không trùng lặp.
+- Rất hữu ích khi làm chức năng filter (bộ lọc), bảng thống kê, hoặc đổ dữ liệu cho dropdown list.
+- Khi muốn khảo sát xem có những giá trị nào đang tồn tại trong một cột cụ thể.
+- Đóng vai trò như một "bộ lọc trùng lặp" giúp kết quả gọn gàng, dễ đọc và dễ phân tích dữ liệu hơn.
+
+![DISTINCT - Lấy giá trị khác nhau](./images/lenh_sql_co_ban_p2.png)
+
+---
+
+### 1.3. WHERE – Lọc dữ liệu theo điều kiện
+**📌 Overview:**
+- Dùng để lọc (filter) các dòng dữ liệu thỏa mãn điều kiện đưa ra (chỉ những dòng thỏa mãn điều kiện mới được trả về).
+- Vị trí: Luôn đứng sau `FROM` (và đứng trước `GROUP BY`, `ORDER BY` nếu có).
+- Hỗ trợ nhiều toán tử so sánh (`=`, `<>`, `>`, `<`, `BETWEEN`, `IN`, `LIKE`, `IS NULL`) và có thể kết hợp nhiều điều kiện bằng toán tử logic (`AND`, `OR`).
+
+**💡 Khi nào dùng:**
+- Dùng `WHERE` để lọc ra đúng tập dữ liệu cần thiết phục vụ cho việc kiểm tra (test).
+- Nên kết hợp toán tử và logic theo nhiều cách để bao phủ các kịch bản test.
+- Với dữ liệu ngày tháng, luôn đảm bảo định dạng đúng (thường là `YYYY-MM-DD`).
+- **Kiểm tra các trường hợp biên:** Cần chú ý test với các điều kiện `=`, `>`, `<`, `NULL`, rỗng, hoặc các giá trị nằm ngoài khoảng giới hạn.
+- **Thứ tự thực hiện câu lệnh SQL (Cực kỳ quan trọng để hiểu luồng):** `FROM` $\rightarrow$ `WHERE` $\rightarrow$ `SELECT` $\rightarrow$ `ORDER BY`.
+
+![WHERE - Lọc dữ liệu theo điều kiện](./images/lenh_sql_co_ban_p3.png)
