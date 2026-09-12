@@ -14,6 +14,8 @@
   - [1.1. SELECT – Lấy dữ liệu](#11-select--lấy-dữ-liệu)
   - [1.2. DISTINCT – Lấy giá trị khác nhau](#12-distinct--lấy-giá-trị-khác-nhau)
   - [1.3. WHERE – Lọc dữ liệu theo điều kiện](#13-where--lọc-dữ-liệu-theo-điều-kiện)
+  - [1.4. WHERE – Kết hợp điều kiện với AND, OR](#14-where--kết-hợp-điều-kiện-với-and-or)
+  - [1.5. WHERE – Toán tử NOT](#15-where--toán-tử-not)
 
 ---
 
