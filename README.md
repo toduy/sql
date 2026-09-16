@@ -16,6 +16,7 @@
   - [1.3. WHERE – Lọc dữ liệu theo điều kiện](#13-where--lọc-dữ-liệu-theo-điều-kiện)
   - [1.4. WHERE – Kết hợp điều kiện với AND, OR](#14-where--kết-hợp-điều-kiện-với-and-or)
   - [1.5. WHERE – Toán tử NOT](#15-where--toán-tử-not)
+  - [1.6. Aggregate Functions - Hàm tổng hợp](#16-aggregate-functions--hàm-tổng-hợp)
 
 ---
 
@@ -119,3 +120,31 @@
 - Cực kỳ chú ý test các ranh giới (boundary), ví dụ như khi dùng `NOT >` hoặc `NOT <` cần kiểm tra xem giá trị tại đúng ranh giới đó (như `amount = 10000000`) có bị loại bỏ sai hay không.
 
 ![WHERE - TOÁN TỬ NOT](./images/lenh_sql_co_ban_p4_where_not.png)
+
+---
+
+### 1.6. Aggregate Functions - Hàm tổng hợp
+
+**Overview:**
+
+Aggregate functions dùng để **tính toán trên nhiều dòng dữ liệu** và trả về **một giá trị tổng hợp**.
+
+Các hàm thường dùng:
+
+- `MIN()` → giá trị nhỏ nhất
+- `MAX()` → giá trị lớn nhất
+- `COUNT()` → đếm số dòng / giá trị
+- `SUM()` → tính tổng
+- `AVG()` → tính giá trị trung bình
+
+**Khi nào dùng:**
+
+- Tìm **giá trị nhỏ nhất / lớn nhất** → `MIN()`, `MAX()`
+- **Đếm** số lượng dữ liệu → `COUNT()`
+- Tính **tổng** → `SUM()`
+- Tính **trung bình** → `AVG()`
+- Tổng hợp dữ liệu trước khi phân tích hoặc báo cáo
+- Kết hợp với `WHERE` khi muốn **lọc dữ liệu trước rồi mới tính**
+- Kết hợp với `GROUP BY` khi muốn **tính toán theo từng nhóm**
+
+![Aggregate Functions](./images/lenh_sql_co_ban_p6_aggregate.png)
